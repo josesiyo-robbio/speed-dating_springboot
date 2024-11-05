@@ -17,6 +17,8 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
+
+
 @Service
 public class NewEventService
 {
@@ -34,13 +36,13 @@ public class NewEventService
     @Autowired
     private JwtService jwtService;
 
+
     public NewEventService(EventRepository eventRepository, RegistrationRepository registrationRepository)
     {
         this.eventRepository = eventRepository;
         this.registrationRepository = registrationRepository;
     }
 
-    //starts to transsation
 
     @Transactional
     public EventDto createNewEvent(EventDto eventDto)
@@ -56,6 +58,7 @@ public class NewEventService
             event.setDateTime(dateTime);
             Event savedEvent = eventRepository.save(event);
 
+
             //transaction #2 - Insert new participants in table registrations
             for (ParticipantDto participantDto : eventDto.getParticipants())
             {
@@ -67,19 +70,22 @@ public class NewEventService
                 registrationRepository.save(registration);
             }
 
+
             // Create a rotations
             List<List<Object>> rotations = RotationService.generateRotations(eventDto.getParticipants(), eventDto.getDuration(), dateTime);
+
 
             //sending emails
             for (ParticipantDto participantDto : eventDto.getParticipants())
             {
                 String token = jwtService.generateToken(new HashMap<String, Object>() {{
                     put("email", participantDto.getEmail());
-                    put("event_id", savedEvent.getId()); // Asegúrate de que getId() devuelva un Long
+                    put("event_id", savedEvent.getId());
                 }});
 
                 emailService.sendEmail(message -> {
-                    try {
+                    try
+                    {
                         MimeMessageHelper helper = new MimeMessageHelper(message, true);
                         helper.setFrom("Event Organizer <your-email@example.com>");
                         helper.setTo(participantDto.getEmail());
@@ -91,26 +97,27 @@ public class NewEventService
                                 "Access Token: " + token + "\n\n" +
                                 "Best regards,\n" +
                                 "Event Organizer");
-                    } catch (MessagingException e) {
+                    }
+                    catch (MessagingException e)
+                    {
                         e.printStackTrace();
                     }
                 });
             }
+
 
             EventDto newEVent = new EventDto();
             newEVent.setId(savedEvent.getId());
             newEVent.setRotations(rotations);
             newEVent.setMessage("Event created successfully");
             return newEVent;
-
-
         }
         catch (Exception e)
         {
             log.error("Error creating event", e);
             throw e;
         }
-
     }
+
 }
 

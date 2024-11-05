@@ -5,11 +5,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
-public class EmailService {
+public class EmailService
+{
 
     @Autowired
     private JavaMailSender mailSender;
+
 
     public void sendEmail(MimeMessagePreparator messagePreparator)
     {

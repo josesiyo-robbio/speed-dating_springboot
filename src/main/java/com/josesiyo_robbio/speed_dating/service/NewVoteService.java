@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
 @Service
 public class NewVoteService
 {
@@ -26,6 +28,7 @@ public class NewVoteService
         this.voteRepository = voteRepository;
         this.registrationRepository = registrationRepository;
     }
+
 
     @Transactional
     public VoteDto newVoting(VoteDto voteDto)
@@ -50,6 +53,7 @@ public class NewVoteService
             throw new IllegalStateException("Duplicate vote is not allowed");
         }
 
+
         // Save the new vote
         Vote newVote = new Vote();
         newVote.setVoterEmail(voteDto.getVoterEmail());
@@ -58,7 +62,6 @@ public class NewVoteService
         voteRepository.save(newVote);
 
         log.info("Vote recorded successfully: Voter=" + voteDto.getVoterEmail() + ", Voted=" + voteDto.getVotedEmail());
-
         voteDto.setMessage("Vote recorded successfully");
 
         return voteDto;

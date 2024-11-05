@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+
+
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long>
 {
-
     @Query(value = """
             SELECT
                 LEAST(v1.voter_email, v1.voted_email) AS email1,

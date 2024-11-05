@@ -10,34 +10,16 @@ public class NewEventResponse
     private Long eventId;
     private List<List<Object>> rotations;
 
-    // GETTERS and SETTERS
-    public String getMessage()
-    {
-        return message;
-    }
 
-    public void setMessage(String message)
-    {
-        this.message = message;
-    }
+    // GETTERS
+    public String getMessage()                  { return message;   }
+    public Long getEventId()                    { return eventId;   }
+    public List<List<Object>> getRotations()    { return rotations; }
 
-    public Long getEventId()
-    {
-        return eventId;
-    }
 
-    public void setEventId(Long eventId)
-    {
-        this.eventId = eventId;
-    }
+    //SETTERS
+    public void setMessage(String message)                  { this.message = message;       }
+    public void setEventId(Long eventId)                    { this.eventId = eventId;       }
+    public void setRotations(List<List<Object>> rotations)  { this.rotations = rotations;   }
 
-    public List<List<Object>> getRotations()
-    {
-        return rotations;
-    }
-
-    public void setRotations(List<List<Object>> rotations)
-    {
-        this.rotations = rotations;
-    }
 }
