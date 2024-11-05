@@ -3,6 +3,8 @@ package com.josesiyo_robbio.speed_dating.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+
+
 public class RegistrationId implements Serializable
 {
     private Long eventId;
@@ -11,14 +13,16 @@ public class RegistrationId implements Serializable
     // Empty constructor required for serialization
     public RegistrationId() {}
 
+
     // GETTERS
-    public Long getEventId() { return eventId; }
-    public void setEventId(Long eventId) { this.eventId = eventId; }
+    public Long getEventId()                { return eventId;           }
+    public String getParticipantEmail()     { return participantEmail;  }
 
 
     //SETTERS
-    public String getParticipantEmail() { return participantEmail; }
-    public void setParticipantEmail(String participantEmail) { this.participantEmail = participantEmail; }
+    public void setEventId(Long eventId)                        { this.eventId = eventId;                       }
+    public void setParticipantEmail(String participantEmail)    { this.participantEmail = participantEmail;     }
+
 
     // hashCode and equals to ensure equality
     @Override
@@ -26,6 +30,7 @@ public class RegistrationId implements Serializable
     {
         return Objects.hash(eventId, participantEmail);
     }
+
 
     @Override
     public boolean equals(Object obj)
@@ -36,5 +41,6 @@ public class RegistrationId implements Serializable
         return Objects.equals(eventId, that.eventId) &&
                 Objects.equals(participantEmail, that.participantEmail);
     }
+
 }
 

@@ -2,6 +2,8 @@ package com.josesiyo_robbio.speed_dating.model;
 
 import jakarta.persistence.*;
 
+
+
 @Entity
 @Table(name = "votes")
 public class Vote

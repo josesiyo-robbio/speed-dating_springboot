@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public class RegistrationDto
 {
-
     @NotBlank()
     private Long id;
 
