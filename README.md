@@ -1,4 +1,4 @@
-# Speed Dating API
+# Speed Dating
 
 ## Overview
 This REST API is designed to manage speed dating events, allowing users to create events, participate in dating rounds, submit votes, and discover matches. Built with Spring Boot and PostgreSQL, it follows REST architecture principles and best practices.
